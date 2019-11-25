@@ -1,0 +1,4 @@
+1. git init //如果已经init了就不用
+2. git add ./xxx/xxx  //使用git add添加文件
+3. git commit -m "更新注释" //使用git commit 更新
+4. git push origin master //推送代码 之后要输入用户名:majiaoliya 密码:xxxxxxxx
