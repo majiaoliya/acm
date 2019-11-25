@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#define MAXN 105
+using namespace std;
+
+int n;
+
+int main(void) {
+	freopen("test", "r", stdin);
+	
+	for( ; EOF != scanf("%d", &n); ) {
+		int rs = 0;
+		while(n) {
+			int t = n%10;
+			rs = max(t, cnt);
+			n /= 10;
+		}
+		printf("%d\n", cnt);
+	}
+	
+	return 0;
+}

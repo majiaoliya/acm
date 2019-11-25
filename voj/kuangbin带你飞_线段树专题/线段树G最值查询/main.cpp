@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#define MAXN 50005
+using namespace std;
+
+int n, mx[MAXN<<2], mn[MAXN<<2], lazy_max[MAXN<<2], lazy_min[MAXN<<2], m;
+
+void push_up(int x) {
+	mx[x] = max(mx[x<<1], mx[x<<1|1]);
+	mn[x] = min(mn[x<<1], mn[x<<1|1]);
+}
+
+void build(int x, int lef, int rig) {
+	if(lef == rig) {
+		int a;
+		scanf("%d", &a); 
+		mx[x] = mn[x] = a;
+		return ;
+	}
+	int mid = (lef+rig) >> 1;
+	build(x<<1, lef, mid);
+	build(x<<1|1, mid+1, rig);
+	push_up(x);
+}
+
+int query_min(int x, int lef, int rig, int L, int R) {
+	if(L<=lef && rig<=R) return mn[x];
+	int mid = (lef+rig) >> 1, ret = 1000005;
+	if(L<=mid) ret = min(ret, query_min(x<<1, lef, mid, L, R));
+	if(R>mid) ret = min(ret, query_min(x<<1|1, mid+1, rig, L, R));
+	return ret;
+}
+
+int query_max(int x, int lef, int rig, int L, int R) {
+	if(L<=lef && rig<=R) return mx[x];
+	int mid = (lef+rig) >> 1, ret = 0;
+	if(L<=mid) ret = max(ret, query_max(x<<1, lef, mid, L, R));
+	if(R>mid) ret = max(ret, query_max(x<<1|1, mid+1, rig, L, R));
+	return ret;
+}
+
+int main(void) {
+	freopen("test", "r", stdin);
+	for( ; EOF != scanf("%d %d", &n, &m); ) {
+		build(1, 1, n);
+		int L, R;
+		for(int i=1; i<=m; i++) {
+			scanf("%d %d", &L, &R);
+			printf("%d\n", query_max(1, 1, n, L, R) - query_min(1, 1, n, L, R));
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,17 @@
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <vector>
+//#include <algorithm>
+#define ll long long int
+#define MAXN 100005
+using namespace std;
+
+int main(void) {
+	int arr[100];
+	for(int i=0; i<100; i++)
+		arr[i] = i;
+	int a = (1<<16)+1;
+	memset(arr, (char)a, sizeof())
+	return 0;
+}

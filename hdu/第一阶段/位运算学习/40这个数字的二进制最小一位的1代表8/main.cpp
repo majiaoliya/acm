@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int lowbit(int x) {
+	return x & -x;
+}
+
+int main(void) {
+	
+	/**
+	  	    40 = 00101000
+	 	   -40 = 11010111 + 1 = 11011000
+	  40 & -40 = 00101000 & 11011000 = 00001000 = 8
+	 */
+	 // n & -n = n的二进制的最后一个1
+	printf("%d", lowbit(40));
+	return 0;
+}

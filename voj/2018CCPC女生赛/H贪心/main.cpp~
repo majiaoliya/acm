@@ -1,0 +1,30 @@
+//#include <stdio.h>
+//#include <iostream>
+//#include <string>
+//#include <string.h>
+//#define MAXN 1000005
+//using namespace std;
+
+//int n, t;
+//char str[MAXN];
+//char tag[MAXN];
+//int main(void) {
+//	freopen("test", "r", stdin);
+////	string str = "quailtyacmbestacm";
+////	for(int i=0; i<str.length(); i++)
+////		printf("%d ", str[i]);
+//	scanf("%d", &t);
+//	for( ; t--; ) {
+//		scanf("%d %s", &n, str);
+//		for(int i=0; i<n-1; i++)
+//			if(str[i] < str[i+1]) tag[i] = '<';
+//			else tag[i] = '>';
+//		for(int i=0; i<n-1; i++)
+//			printf("%c", tag[i]);
+//		printf("\n");
+//	}
+//	return 0;
+//}
+
+////<><<<<><<><<<><<
+////<><<<<><<><<<><<

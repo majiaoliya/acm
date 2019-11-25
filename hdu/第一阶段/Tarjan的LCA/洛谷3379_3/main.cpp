@@ -1,0 +1,65 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+const int MAXN = 5e5+5;
+int n, m, rootid;
+
+struct Node {
+	int x, y, lca;
+} query[MAXN];
+
+vector<int> G[MAXN];
+vector<int> Q[MAXN];
+
+int pre[MAXN], vis[MAXN];
+
+int fa(int x) {
+	int ret = x;
+	while(pre[ret] != -1)
+		ret = pre[ret];
+	return ret;
+}
+
+void init() {
+	for(int i=0; i<n+2; i++)
+		pre[i] = -1;
+}
+
+void dfs(int u) {
+	vis[u] = true;
+	for(int i=0; i<Q[u].size(); i++) {
+		int idx = Q[u][i], v;
+		if(query[idx].x == u) 
+			v = query[idx].y;
+		else if(query[idx].y == u)
+			v = query[idx].x;
+		if(vis[v]) query[idx].lca = fa(v);
+	}
+	for(int i=0; i<G[u].size(); i++) {
+		int chl = G[u][i];
+		if(vis[chl]) continue;
+		dfs(chl);
+		pre[chl] = u;
+	}
+}
+
+int main(void) {
+//	freopen("test", "r", stdin);
+	scanf("%d %d %d", &n, &m, &rootid);
+	for(int i=1, x, y; i<n; i++) {
+		scanf("%d %d", &x, &y);
+		G[x].push_back(y);
+		G[y].push_back(x);
+	}
+	for(int i=1; i<=m; i++) {
+		scanf("%d %d", &query[i].x, &query[i].y);
+		Q[query[i].x].push_back(i);
+		Q[query[i].y].push_back(i);
+	}
+	init();
+	dfs(rootid);
+	for(int i=1; i<=m; i++) 
+		printf("%d\n", query[i].lca);
+	return 0;
+}

@@ -1,0 +1,8 @@
+all: main main2
+main: main.cpp
+	g++ -g -o main main.cpp
+main2: main2.cpp
+	g++ -g -o main2 main2.cpp
+clean:
+	rm main main2
+

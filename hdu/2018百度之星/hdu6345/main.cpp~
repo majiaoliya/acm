@@ -1,0 +1,43 @@
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <vector>
+#define min(x,y) ( x > y ? y : x )
+#define ll long long int
+#define MAXN 100010
+using namespace std;
+
+int t, len, m;
+int mtx[30][MAXN];
+char str[MAXN];
+
+int main(void) {
+	freopen("test", "r", stdin);
+	scanf("%d", &t);
+	for(int cases=1; cases<=t; cases++) {
+		memset(mtx, false, sizeof(mtx));
+		printf("Case #%d:\n", cases);
+		scanf("%d %d", &len, &m);
+		scanf("%s", str+1);
+		
+		for(int i=1; i<=26; i++) {
+			char c = i+'A'-1;
+			for(int k=1; k<=len; k++) {
+				mtx[i][k] = mtx[i][k-1] + (c==str[k] ? 1 : 0);
+			}
+		}
+		int L, R;
+		while(m--) {
+			scanf("%d %d", &L, &R);
+			if(L==R) { printf("1  "); continue; }
+			for(int i=1; i<=26; i++) {
+				if(mtx[i][R]-mtx[i][L-1]) {
+					printf("%d\n", mtx[i][R]-mtx[i][L-1]);
+					break;
+				}
+			}
+		}
+		printf("\n");
+	}
+	return 0;
+}

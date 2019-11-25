@@ -1,0 +1,21 @@
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+#include <algorithm>
+#define ll long long int
+#define REVERSE { neg = !neg; }
+using namespace std;
+
+int main(void) {
+	int t;
+	ll n;
+	freopen("test", "r", stdin);
+	scanf("%d", &t);
+	for(int i=1; i<=t; i++) {
+		scanf("%lld", &n);
+//		Sn=n*a1+n(n-1)d/2
+		ll Sn = n*1+(n*(n-1) * 1)/2;
+		printf("Case #%d: %lld\n", i, Sn-1);
+	}
+	return 0;
+}

@@ -1,0 +1,18 @@
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int t, n;
+
+int main(void) {
+	freopen("test", "r", stdin);
+	cin >> t;
+	while(t--) {
+		cin >> n;
+//		cout << (pow(2, n)-1) << endl;
+		printf("%d\n", (int)pow(2, n) - 1);  
+	}
+	return 0;
+}
+

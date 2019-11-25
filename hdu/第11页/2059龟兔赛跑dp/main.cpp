@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#define MAXN 105
+#define OO 999999999
+using namespace std;
+
+int n;
+double arr[MAXN], dp[MAXN], ts[MAXN];
+int N;
+double C, T, VR, VT, VT2, len;
+
+int main(void) {
+//	freopen("test", "r", stdin);
+	for( ; EOF != scanf("%lf", &len); ) {
+		memset(ts, false, sizeof(ts));
+		scanf("%lf %lf %lf", &N, &C, &T);
+		scanf("%lf %lf %lf", &VR, &VT, &VT2);
+		for(int i=1; i<=n; i++)
+			scanf("%lf", arr+i);
+		double rt = len/VR; //兔子的时间
+		double tt = 0, dist = len;
+		double x = C; //当前电量
+		int idx = 1;
+		while(dist > 0) {
+			double sub = arr[idx] - arr[idx-1];
+			double t1 = T + C; //充电
+			double t2 = ts[idx-1] + x/VT + (sub-x)/VT2; //不充电
+		}
+	}
+	return 0;
+}

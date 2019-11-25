@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main(void) {
+	freopen("test", "r", stdin);
+	int t;
+	cin >> t;
+	cin.ignore();
+	while(t--) {
+		string str;
+		getline(cin, str);
+		int cnt = 0;
+		for(int i=0; i<str.length(); i++) 
+			if(str[i] < 0) cnt ++;
+		printf("%d\n", cnt/2);
+	}
+	
+	return 0;
+}

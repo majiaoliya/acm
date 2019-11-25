@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#define MAXN 105
+using namespace std;
+
+int n, t;
+char buf[32];
+
+int main(void) {
+	freopen("test", "r", stdin);
+	scanf("%d\n", &t);
+	while(t--) {
+		scanf("%s", buf);
+		printf("6%s\n", buf+6);
+	}
+	return 0;
+}

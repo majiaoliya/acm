@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#define MAXN 105
+#define ll long long
+using namespace std;
+
+ll n, lef, rig, arr[MAXN], sum[MAXN], t;
+
+void get_fb() {
+	arr[1] = arr[2] = 1;
+	sum[1] = 1, sum[2] = 2;
+ 	for(int i=3; i<MAXN; i++) {
+		arr[i] = arr[i-1] + arr[i-2];
+		sum[i] = arr[i] + sum[i-1];
+	}
+}
+
+void my_swap(ll& x, ll& y) {
+	ll t = x;
+	x = y;
+	y = t;
+}
+
+int main(void) {
+	freopen("test", "r", stdin);
+	get_fb();
+	for(scanf("%lld", &t); t-- && EOF!=scanf("%lld %lld", &lef, &rig); ) {
+		if(lef > rig) my_swap(lef, rig);
+		printf("%lld\n", sum[rig-lef]-sum[lef]);
+	}
+	return 0;
+}

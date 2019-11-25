@@ -1,0 +1,115 @@
+#define debug
+#ifdef debug
+#include <time.h>
+#include "/home/majiao/mb.h"
+#endif
+
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string.h>
+#include <math.h>
+#define MAXN 100005
+#include <map>
+#include <unordered_set>
+#define ll long long int
+
+using namespace std;
+
+ll T, n, m;
+ll block, l[MAXN], r[MAXN], belong[MAXN], num;
+string str[MAXN], cmd;
+
+ll tag[] = {
+	10, 100, 1000, 10000, 100000, 1000000,10000000,100000000,1000000000,10000000000
+};
+int arr[MAXN][11][11]; //每一块存每个位有几个
+//struct Block {
+//	int arr[16];
+//	Block(ll i) : l((i-1)*block+1), r(i*block) { memset(arr, false, sizeof(arr)); }
+//	Block() : l(0), r(0) { memset(arr, false, sizeof(arr)); }
+//} blk[MAXN];
+
+void build() {
+	block = sqrt(n);
+	num = n/block;
+	if(n%block) num ++;
+	for(int i=1; i<=num; i++)
+		l[i] = (i-1)*block+1, r[i] = i*block;
+}
+
+void setval(int i, string& s, bool flag) {
+	int k, j;
+	if(flag) { //先吧原来的减去
+		string& ts = str[i];
+		for(k=ts.length()-1, j=1; k>=0; k--, j++) {
+			int pos = ts[k] - '0';
+			arr[belong[i]][j][pos] --;
+		}
+		for( ; j<=10; j++) arr[belong[i]][j][0] --;
+		str[i] = s;
+	}
+	for(k=s.length()-1, j=1; k>=0; k--, j++) {
+		int pos = s[k]-'0';
+		arr[belong[i]][j][pos] ++;
+	}
+	for( ; j<=10; j++) arr[belong[i]][j][0] ++;
+}
+
+int query(int L, int R, int x, int y) {
+	int ans = 0;
+	if(belong[L] == belong[R]) {
+		for(int i=L; i<=R; i++)
+			if(str[i][x]-'0' == y) ans ++;
+		return ans;
+	}
+	for(int i=L; i<=r[belong[L]]; i++) if(str[i][x]-'0' == y) ans++;
+	for(int i=belong[L]+1; i<belong[R]; i++)
+		ans += arr[i][x][y];
+	for(int i=l[belong[R]]; i<=r[belong[R]]; i++) if(str[i][x]-'0' == y) ans ++;
+	return ans;
+}
+
+int main() {
+#ifdef debug
+	freopen("test", "r", stdin);
+	clock_t stime = clock();
+#endif
+	ios::sync_with_stdio(false);
+	cin >> T;
+	while(T--) {
+		cin >> n >> m;
+		build();
+		for(int i=1; i<=n; i++) {
+			belong[i] = (i-1)/block + 1;
+			cin >> str[i];
+			setval(i, str[i], false);
+		}
+		for( ; m--; ) {
+			cin >> cmd;
+//			cout << "cmd = " << cmd << endl;
+			if(cmd == "Q") {
+				int L, R, x, y;
+				cin >> L >> R >> x >> y;
+				int ans = query(L, R, x, y);
+				printf("%d\n", ans);
+			} else {
+				string val;
+				int idx;
+				cin >> idx >> val;
+				setval(idx, val, true);
+			}
+		}
+	}
+
+
+
+
+#ifdef debug
+	clock_t etime = clock();
+	printf("rum time: %lf 秒\n",(double) (etime-stime)/CLOCKS_PER_SEC);
+#endif 
+	return 0;
+}
+

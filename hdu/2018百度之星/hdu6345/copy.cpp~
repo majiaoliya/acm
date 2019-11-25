@@ -1,0 +1,38 @@
+#include<stdio.h>   //前缀和变相 
+#include<string.h>
+int c[26][100010];
+int main(){
+	freopen("test", "r", stdin);
+	int n;
+	scanf("%d",&n);
+	for(int t=1;t<=n;t++){
+		int n,q,k=1;
+		char ch;
+		scanf("%d%d",&n,&q);
+		getchar();
+		while((ch=getchar())!='\n'){  //如果在K位置出现了，相应的字母，则先让其 等于1 
+			c[ch-'A'][k++]=1;
+		}
+	    for(int i=0;i<26;i++){
+	    	for(int j=2;j<=k;j++){  //将 前缀和 统计相加 
+	    		c[i][j]+=c[i][j-1];
+	    	}
+	    }
+	    printf("Case #%d:\n",t);
+	    while(q--){
+	    	int start,end;
+	    	scanf("%d%d",&start,&end);
+	    	if(start == end){   //如果前后位置相同 
+	    		printf("1  ");
+	    		continue;
+	    	}
+	    	for(int i=0;i<26;i++){
+	    		if(c[i][end]-c[i][start-1]!=0){   //如果 end位置 减 start-1 前驱不等于0 
+	    			printf("%d  ",c[i][end]-c[i][start-1]); //则算出结果 
+	    			break;
+	    		}
+	    	}
+	    }
+	    memset(c,0,sizeof(c));
+	}
+}

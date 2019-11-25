@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#define MAXN 55
+#define ll long long int
+using namespace std;
+
+ll n, arr[MAXN];
+
+int main(void) {
+	freopen("test", "r", stdin);
+	arr[1] = 3, arr[2] = 8;
+	for(int i=3; i<MAXN; i++)
+		arr[i] = 2*(arr[i-1]) + 2*(arr[i-2]);
+	for( ; EOF != scanf("%lld", &n); ) 
+		printf("%lld\n", arr[n]);
+	return 0;
+}

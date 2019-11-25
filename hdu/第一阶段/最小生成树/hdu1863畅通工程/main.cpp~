@@ -1,0 +1,54 @@
+#include <iostream>
+#include <algorithm>
+#include <math.h>
+#include <vector>
+#define MAXN (1000005)
+using namespace std;
+
+int n, m, pre[1005];
+
+struct Edge {
+	int from, to, dist;
+} arr[MAXN];
+
+void init() {
+	for(int i=1; i<=m+10; i++)
+		pre[i] = -1;
+}
+
+int fa(int x) {
+	int ret = x;
+	while(pre[ret] != -1)
+		ret = pre[ret];
+	if(ret != x) pre[x] = ret;
+	return ret;
+}
+
+int krs() {
+	init();
+	sort(arr+1, arr+1+n, cmp)
+	int sum = 0, ne = 0; //ne统计边数 少于m-1条边无法成树
+	for(int i=1; i<=n; i++) {
+		int rx = fa(arr[i].from), ry = fa(arr[i].to);
+		if(rx == ry) continue;
+		ne ++;
+		sum += arr[i].dist;
+		pre[ry] = rx;
+	}
+	if(ne == m-1) return sum;
+	return -1;
+}
+
+int main(void) {
+	freopen("test", "r", stdin);
+	while(EOF != scanf("%d %d", &n, &m)) {
+		if(n == 0) break;
+		for(int i=1; i<=n; i++)
+			scanf("%d %d %d", &arr[i].from, &arr[i].to, &arr[i].dist);
+		int rs = krs();
+		if(rs == -1) printf("?\n");
+		else printf("%d\n", rs);
+	}
+
+	return 0;
+}

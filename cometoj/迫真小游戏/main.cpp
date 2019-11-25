@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#define ll long long int 
+using namespace std;
+#define MAXN ((int)5e5+5)
+
+int n, arr[MAXN];
+bool vis[MAXN], dfs_vis[MAXN];
+
+vector<int> G[MAXN];
+
+void dfs(int x) {
+	vis[x] = true;
+	for(int i=0; i<G[x].size(); i++) {
+		int chl = G[x][i];
+		if(!vis[chl])
+			dfs(chl);
+	}
+}
+
+int main(void) {
+	freopen("test", "r", stdin);
+	
+	scanf("%d", &n);
+	for(int i=1; i<n; i++) {
+		scanf("%d %d", &x, &y);
+		G[x].push_back(y);
+		G[y].push_back(x);
+	}
+	for(int i=1; i<=n; i++)
+		scanf("%d", arr+i);
+	int cnt = 0;
+	while(cnt < n) {
+		
+	}
+	return 0;
+}

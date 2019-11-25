@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <iostream>
+#include <map>
+#include <algorithm>
+#include <string>
+#define MAXN 1000000
+using namespace std;
+
+int nv, ne, pre[512], vis[512];
+
+struct Edge {
+	int from, to, dist;
+} arr[MAXN];
+
+int cmp(Edge& x, Edge& y) { return x.dist < y.dist; }
+
+void init() {
+	ne = 0;
+	for(int i=0; i<512; i++)
+		pre[i] = -1, vis[i] = false;
+}
+
+int fa(int x) {
+	int ret = x;
+	while(pre[ret] != -1)
+		ret = pre[ret];
+	return ret;
+}
+
+int krs() {
+	sort(arr+1, arr+1+ne, cmp);
+	int sum = 0;
+	for(int i=1; i<=ne; i++) {
+		int& x = arr[i].from;
+		int& y = arr[i].to;
+		int rx = fa(x), ry = fa(y), d = arr[i].dist;
+		if(rx == ry) continue;
+		pre[ry] = rx;
+		sum += d;
+	}
+	return sum;
+}
+
+int main(void) {
+	freopen("test", "r", stdin);
+	for(int t; EOF != scanf("%d", &nv) && nv; ) {
+		init();
+		for(int i=1; i<nv; i++) {
+			char from[4], to[4];
+			int t, dist;
+			scanf("%s %d", from, &t);
+			for( ; t--; ) {
+				ne ++;
+				scanf("%s %d", to, &dist);
+				arr[ne].from = from[0], arr[ne].to = to[0], arr[ne].dist = dist;
+				vis[arr[ne].from] = vis[arr[ne].to] = true;
+			}
+		}
+		printf("%d\n", krs());
+//		for(int i=1; i<=ne; i++)
+//			printf("%c %c %d\n", arr[i].from, arr[i].to, arr[i].dist);
+//		printf("\n");
+	}
+	return 0;
+}

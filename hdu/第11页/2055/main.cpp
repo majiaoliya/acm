@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#define MAXN 105
+using namespace std;
+
+int t;
+char buf[4096];
+
+int main(void) {
+	freopen("test", "r", stdin);
+	cin >> t;
+	cin.ignore();
+	for( ; t--; ) {
+		cin.getline(buf, sizeof(buf));
+//		cout << buf << endl;
+		int cnt = 0, tag1 = 0, tag2 = 0, tag3 = 0, tag4 = 0, len = 0;
+		for(int i=0; buf[i]; i++) {
+			len ++;
+			if(!tag1 && buf[i]>='A' && buf[i]<='Z') tag1 = ++cnt;
+			if(!tag2 && buf[i]>='a' && buf[i]<='z') tag2 = ++cnt;
+			if(!tag3 && buf[i]>='0' && buf[i]<='9') tag3 = ++cnt;
+			if(!tag4 && (buf[i]=='~' || buf[i]=='!' || buf[i]=='@' || buf[i]=='#' || buf[i]=='$' || buf[i]=='%' || buf[i]=='^')) tag4 = ++cnt;
+		}
+		cout << (cnt>=3 && len>=8 && len<=16 ? "YES" : "NO") << endl; 
+	}
+	return 0;
+}

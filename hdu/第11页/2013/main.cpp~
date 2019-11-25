@@ -1,0 +1,20 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <math.h>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int main(void) {
+	freopen("test", "r", stdin);
+	for(int n; EOF != scanf("%d", &n); ) {
+		int rs = 1;
+		while(n-- > 1) {
+			rs += 1;
+			rs <<= 1;
+		}
+		printf("%d\n", rs)
+	}
+	return 0;
+}

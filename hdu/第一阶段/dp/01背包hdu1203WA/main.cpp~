@@ -1,0 +1,70 @@
+//二维的超内存
+
+//#include <iostream>
+//#include <algorithm>
+//#include <string.h>
+//#define MAXN 10005
+//using namespace std;
+
+//int w[MAXN], p[MAXN], dp[MAXN][MAXN], n, v, t;
+
+//int main()
+//{
+//	freopen("test", "r", stdin);
+//	scanf("%lld", &t);
+//	
+//	while(t--) {
+//		scanf("%lld %lld", &n, &v);
+//		memset(dp, false, sizeof(dp));
+//		for(int i=1; i<=n; i++)
+//			scanf("%lld", w+i);
+//		for(int i=1; i<=n; i++)
+//			scanf("%lld", p+i);
+//		for(int i=1; i<=n; i++) {
+//			for(int k=0; k<=v; k++) {
+//				if(k<w[i]) //装不下
+//					dp[i][k] = dp[i-1][k];
+//				else
+//					dp[i][k] = max(dp[i-1][k], dp[i-1][k-w[i]]+p[i]);
+//			}
+//		}
+//		printf("%lld\n", dp[n][v]);
+//	}
+//	
+//	return 0;
+//}
+
+
+
+#include <iostream>
+#include <algorithm>
+#include <string.h>
+#define MAXN 1005
+#define ll long long  
+using namespace std;
+
+ll w[MAXN], p[MAXN], dp[MAXN], n, v, t;
+
+int main()
+{
+	freopen("test", "r", stdin);
+	scanf("%lld", &t);
+	while(t--) {
+		scanf("%lld %lld", &n, &v);
+		memset(dp, false, sizeof(dp));
+		for(ll i=1; i<=n; i++)
+			scanf("%lld", w+i);
+		for(ll i=1; i<=n; i++)
+			scanf("%lld", p+i);
+		for(ll i=1; i<=n; i++) {
+			for(ll k=v; k>0; k--)
+				dp[k] = max(dp[k], dp[k-w[i]]+p[i]);
+		}
+		printf("%lld\n", dp[v]);
+	}
+	
+	return 0;
+}
+
+
+
