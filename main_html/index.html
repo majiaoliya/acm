@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+	<script src="./jquery.js,jquery.backstretch.min.js" type="text/javascript"></script>
+</head>
+<body>
+<script type="text/javascript">
+$.backstretch([
+
+	'./img/p809386220.jpg',
+'./img/6.jpeg',
+'./img/Kaguya-sama wa Kokurasetai - Tensai-tachi no Renai Zunousen 126.965.png',
+'./img/1017801101.gif',
+'./img/1J0124292-3.jpg',
+'./img/p2446528949.jpg',
+'./img/p2235240978.jpg',
+'./img/o_a8f69b4543a98226f2e754978082b9014a90eb0a.jpg',
+'./img/2017年6月17日_21_11_12export.jpg',
+'./img/Kaguya-sama wa Kokurasetai - Tensai-tachi no Renai Zunousen 1217.934.png',
+'./img/Kaguya-sama wa Kokurasetai - Tensai-tachi no Renai Zunousen 128.258.png',
+'./img/Mid0yD.png',
+'./img/9023762BE9FEE376AA7FEA2139910C06_0..jpg',
+'./img/p809401216.jpg',
+'./img/1A03W304-3.jpg',
+'./img/a.bmp',
+'./img/p809394272.jpg',
+'./img/342297843.jpg',
+'./img/1712924757.jpg',
+
+], {
+        fade : 1000, // 动画时长
+        duration : 2000 // 切换延时
+});
+</script>
+
+    <style>
+    .search_form{
+		left:25%;
+		position:absolute;
+		float: center;
+        width:602px;
+        height:42px;
+		border-radius: 5px;
+    }
+ 
+    /*左边输入框设置样式*/
+    .input_text{
+        width:78%;
+        height: 40px;
+        border:1px solid black;
+		border-radius: 5px;
+        /*清除掉默认的padding*/
+        padding:0px;
+ 
+        /*提示字首行缩进*/
+        text-indent: 10px;
+ 
+        /*去掉蓝色高亮框*/
+        outline: none;
+ 
+        /*用浮动解决内联元素错位及小间距的问题*/
+        float:left;
+    }
+ 
+    .input_sub{
+        width: 20%;
+        height: 100%;
+        background: WhiteSmoke;
+ 
+        /*去掉submit按钮默认边框*/
+        border:0px;
+        /*改成右浮动也是可以的*/
+        float:right;
+        color:black;/*搜索的字体颜色为白色*/
+        cursor:pointer;/*鼠标变为小手*/
+		border-radius: 5px;
+    }
+    </style>
+</head>
+<body>
+    <form class="search_form" action="https://www.baidu.com/s" target="_blank">
+    <input type="text" class="input_text" name="wd" ><!-- -->
+    <input type="submit" value="搜索" class="input_sub">
+ 
+    </form>
+</body>
+</html>
