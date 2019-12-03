@@ -1,0 +1,35 @@
+10
+Datong 52
+Xuzhou 87
+Hefei 71
+Nanchang 40
+Zhengzhou 81
+Shijiazhuang 56
+Taiyuan 45
+Nanjing 43
+Beijing 78
+Xiamen 55
+22
+Xiamen Beijing 227
+Beijing Nanjing 170
+Xiamen Hefei 95
+Zhengzhou Shijiazhuang 41
+Beijing Datong 70
+Beijing Taiyuan 34
+Taiyuan Datong 65
+Taiyuan Shijiazhuang 19
+Nanjing Hefei 10
+Xuzhou Nanchang 102
+Beijing Shijiazhuang 25
+Xuzhou Beijing 157
+Zhengzhou Xuzhou 37
+Xiamen Xuzhou 139
+Beijing Nanchang 201
+Nanchang Xiamen 65
+Zhengzhou Nanchang 64
+Datong Zhengzhou 125
+Hefei Xuzhou 46
+Shijiazhuang Nanjing 198
+Taiyuan Zhengzhou 43
+Hefei Beijing 165
+Xiamen Datong
