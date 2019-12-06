@@ -1,4 +1,4 @@
-//#define debug
+#define debug
 #ifdef debug
 #include <time.h>
 #include "/home/majiao/mb.h"
@@ -9,39 +9,59 @@
 #include <algorithm>
 #include <vector>
 #include <string.h>
-#define MAXN ((int)2e4+7)
+#define MAXN ((int)5e5+7)
+#include <map>
 #define ll long long int
+#define QAQ (0)
 
 using namespace std;
 
 /**
- * 题意：去掉树上的一个节点，看看剩下的子树中最大的是多少，然后在这些最大值中求一个最小值，如果有多个点都是最小值，那么找一个序号最小的节点。输出节点号，和最小值。
+ * 题意:给定一颗树,求一个节点,使得其他节点到这个节点的路径和最小
+ * 直接dfs求树的重心,再bfs路径和即可
  */
 
-int n, m, u, v, T, ans, son[MAXN], vis[MAXN], id;
+int n, u, v, vis[MAXN], sz[MAXN], ans = 0x3f3f3f3f, id = 0x3f3f3f3f;
 vector<int> G[MAXN];
 
-void init() {
-	ans = id = 0x3f3f3f3f;
-	for(int i=0; i<=n; i++)
-		son[i] = vis[i] = 0, G[i].clear();
-}
-
-void dfs(int now) {
+void dfs(int now) { //求树的重心
 	vis[now] = true;
-	son[now] = 1; //now子树大小
+	sz[now] = 1;
 	int tmax = 0;
 	for(int i=0; i<(int)G[now].size(); i++) {
 		int chl = G[now][i];
 		if(vis[chl]) continue ;
 		dfs(chl);
-		son[now] += son[chl];
-		tmax = max(tmax, son[chl]);
+		sz[now] += sz[chl];
+		tmax = max(tmax, sz[chl]);
 	}
-	tmax = max(tmax, n-son[now]);
-	if(tmax<ans || (tmax==ans && now<id)) {
+	tmax = max(tmax, n-sz[now]);
+	if(tmax<ans || (tmax==ans&&now<id)) {
 		ans = tmax;
 		id = now;
+	}
+}
+
+#include <queue>
+int sum = 0;
+struct Node {
+	int v, step;
+	Node(int _v=0, int _step=0) : v(_v), step(_step) { }
+};
+void bfs(int root) {
+	queue<Node> q;
+	q.push(Node(root, 0)); 
+	memset(vis, false, sizeof(vis));
+	while(!q.empty()) {
+		auto now = q.front(); q.pop();
+//		printf("bfs%d\n", now.v);
+		vis[now.v] = true;
+		sum += now.step;
+		for(int i=0; i<(int)G[now.v].size(); i++) {
+			int chl = G[now.v][i];
+			if(!vis[chl])
+				q.push(Node(G[now.v][i], now.step+1));
+		}
 	}
 }
 
@@ -50,17 +70,16 @@ int main() {
 	freopen("test", "r", stdin);
 	clock_t stime = clock();
 #endif
-	scanf("%d ", &T);
-	while(T--) {
-		scanf("%d ", &n);
-		init();
-		for(int i=1; i<n; i++) {
-			scanf("%d %d ", &u, &v);
-			G[u].push_back(v), G[v].push_back(u);
-		}
-		dfs(1);
-		printf("%d %d\n", id, ans);
+	scanf("%d ", &n);
+	for(int i=1; i<n; i++) {
+		scanf("%d %d ", &u, &v);
+		G[u].push_back(v), G[v].push_back(u);
 	}
+	//for(int i=1; i<=n; i++)
+	//	forvec(G[i]);
+	dfs(1);
+	bfs(id);
+	printf("%d %d\n", id, sum);
 
 
 
