@@ -17,17 +17,23 @@
 
 using namespace std;
 
-ll n, m, T, arr[MAXN];
+/**
+ * 直接枚举每个银币重量+-的每种情况(24种而已)
+ */
 
-ll binsearch(ll key) {
-	ll lef = 1, rig = n, mid;
-	while(lef <= rig) {
-		mid = (lef + rig) >> 1;
-		if(arr[mid] == key) return mid;
-		else if(arr[mid] > key) rig = mid - 1;
-		else lef = mid + 1;
+int T, w[512];
+char lef[128][128], rig[128][128], rs[128][128];
+
+bool check() {
+	for(int id=0; id<3; id++) {
+		int lsum = 0, rsum = 0;
+		for(int i=0; lef[id][i]; i++) lsum += w[(int)lef[id][i]];
+		for(int i=0; rig[id][i]; i++) rsum += w[(int)rig[id][i]];
+		if(lsum<rsum && rs[id][0]!='d') return false;
+		if(lsum==rsum && rs[id][0]!='e') return false;
+		if(lsum>rsum && rs[id][0]!='u') return false;
 	}
-	return -1;
+	return true;
 }
 
 int main() {
@@ -35,33 +41,23 @@ int main() {
 	freopen("test", "r", stdin);
 	clock_t stime = clock();
 #endif
-	cin >> n;
-	for(int i=1; i<=n; i++) cin >> arr[i];
-	cin >> m;
-	sort(arr+1, arr+1+n);
-	/** nlogn 枚举每个数字二分key前提arr[]无重复
-	for(int i=1; i<=n; i++) {
-		ll key = m - arr[i];
-		ll id = binsearch(key);
-		if(-1!=id && id!=i) {
-			cout << min(arr[i],key) << " " << max(key,arr[i]) << endl;
-			goto finish;
+	cin >> T;
+	while(T--) {
+		for(int i=0; i<3; i++) 
+			scanf("%s %s %s ", lef[i], rig[i], rs[i]);
+		int i;
+		for(i='A'; i<='L'; i++) {
+			memset(w, false, sizeof(w));
+			w[i] = 1; //第i枚是重假币
+			if(check()) break;
+			w[i] = -1; //第i枚是轻假币
+			if(check()) break;
+			w[i] = 0;
 		}
+		printf("%c is the counterfeit coin and it is %s.\n", 
+				i, w[i]>0 ? "heavy" : "light");
 	}
-	*/
-	//双指针 O(n)
-	ll lef = 1, rig = n;
-	while(lef < rig) {
-		if(arr[lef]+arr[rig] == m) {
-			cout << arr[lef] << " " << arr[rig] << endl;
-			goto finish;
-		} else if(arr[lef]+arr[rig] < m) lef ++;
-		else rig --;
-	}
-	cout << "No" << endl;
 
-
-finish: ;
 
 #ifdef debug
 	clock_t etime = clock();
