@@ -1,0 +1,29 @@
+];
+		$.backstretch(tmp_arr, {
+				fade : 1000, // 动画时长
+				duration : 8000 // 切换延时
+		});
+		$.backstretch("pause");
+		document.onkeydown = function(e) {
+			if(e && e.keyCode==38 || e && e.keyCode==37){//上,左
+				$.backstretch("prev");
+			}
+
+			if(e && e.keyCode==40 || e && e.keyCode==39){//下,右
+				$.backstretch("next");
+			}
+			/**
+			if(e && e.keyCode == 32) {
+				flag = !flag;
+				$.backstretch(falg ? "pause" : "resume");
+				alert("change");
+			}
+			*/
+		}
+	</script>
+
+
+
+</body>
+
+</html>

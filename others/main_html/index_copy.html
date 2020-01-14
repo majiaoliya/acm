@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+.button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 0px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>main</title>
+	<script src="./jquery.js,jquery.backstretch.min.js" type="text/javascript"></script>
+</head>
+<body>
+	<input type='button' class='button' id='btn1' value="[]">
+	<input type='button' class='button' id='btn3' value="<">
+	<input type='button' class='button' id='btn2' value=">">
+	<input type='button' class='button' id='btn4' value="Orz">
+<script type="text/javascript">
+	
+	var path = "./img/";//本地文件夹路径
+	function swapArray(arr, index1, index2) {
+		arr[index1] = arr.splice(index2, 1, arr[index1])[0];
+		return arr;
+	}
+	/**
+	 * 产生随机整数，包含下限值，但不包括上限值
+	 * @param {Number} lower 下限
+	 * @param {Number} upper 上限
+	 * @return {Number} 返回在下限到上限之间的一个随机整数
+	 */
+	function my_random(lower, upper) {
+		return Math.floor(Math.random() * (upper - lower)) + lower;
+	}
+	
+	var tmp_arr = ['', 
+		'./img/7.jpg',
+'./img/13.png',
+'./img/2.jpg',
+'./img/19.jpg',
+'./img/15.png',
+'./img/10.jpg',
+'./img/18.jpg',
+'./img/12.bmp',
+'./img/8.jpg',
+'./img/14.png',
+'./img/1.jpeg',
+'./img/9.jpg',
+'./img/3.jpg',
+'./img/11.jpg'
+
+	];
+	var imgs = [];
+	var n = 10;
+	var rig = tmp_arr.length-1;
+	for(var i=0; i<n; i++) {
+		var now = my_random(1, rig);
+		imgs.push(tmp_arr[now]);
+		swapArray(tmp_arr, now, rig);
+		rig --;
+	}
+	swapArray(imgs, 1, 0);
+	$.backstretch(imgs, {
+			fade : 1000, // 动画时长
+			duration : 2000 // 切换延时
+	});
+
+	$("#btn1").click(
+		function(e){ //暂停按钮
+			$.backstretch("pause");
+		});
+	$("#btn2").click( //下一张按钮
+		function(e){ 
+			$.backstretch("next");
+		});
+	$("#btn3").click( //下一张按钮
+		function(e){
+			$.backstretch("prev");
+		});
+	$("#btn4").click( //下一张按钮
+		function(e){
+			$.backstretch("resume");
+		});
+	/**$('#btn1').mouseover(function(e) {
+		$('#btn1').show(1000); 
+	});
+	*/
+	/**
+	$('#btn1').mouseout(function(){
+		$('#btn1').css("background-color","transparent");
+	});
+	*/
+
+
+</script>
+
+    <style>
+    .search_form{
+		left:25%;
+		position:absolute;
+		float: center;
+        width:602px;
+        height:42px;
+		border-radius: 5px;
+    }
+ 
+    /*左边输入框设置样式*/
+    .input_text{
+        width:78%;
+        height: 40px;
+        border:1px solid black;
+		border-radius: 5px;
+        /*清除掉默认的padding*/
+        padding:0px;
+ 
+        /*提示字首行缩进*/
+        text-indent: 10px;
+ 
+        /*去掉蓝色高亮框*/
+        outline: none;
+ 
+        /*用浮动解决内联元素错位及小间距的问题*/
+        float:left;
+    }
+ 
+    .input_sub{
+        width: 20%;
+        height: 100%;
+        background: WhiteSmoke;
+ 
+        /*去掉submit按钮默认边框*/
+        border:0px;
+        /*改成右浮动也是可以的*/
+        float:right;
+        color:black;/*搜索的字体颜色为白色*/
+        cursor:pointer;/*鼠标变为小手*/
+		border-radius: 5px;
+    }
+    </style>
+</head>
+<body>
+    <form class="search_form" action="https://www.baidu.com/s" target="_blank">
+    <input type="text" class="input_text" name="wd" ><!-- -->
+    <input type="submit" value="搜索" class="input_sub">
+ 
+    </form>
+</body>
+</html>
+
