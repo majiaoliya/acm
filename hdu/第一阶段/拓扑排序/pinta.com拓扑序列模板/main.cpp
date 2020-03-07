@@ -29,7 +29,7 @@ void init() {
 }
 
 queue<int> q;
-int topsort() {
+int topsort() { //拓扑排序
 	int cnt = 0;
 	while(!q.empty()) { 
 		int now = q.front(); q.pop();

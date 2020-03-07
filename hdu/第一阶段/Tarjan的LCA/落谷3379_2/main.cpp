@@ -25,21 +25,21 @@ int fa(int x) {
 	return ret;
 }
 
-void dfs(int u) {
+void dfs(int u) { //tarjan求lca
 	vis[u] = true;
-	for(int i=0; i<Q[u].size(); i++) {
+	for(int i=0; i<(int)Q[u].size(); i++) {
 		int idx = Q[u][i];
 		if(query[idx].x == u) {
 			int v = query[idx].y;
-			if(vis[v])
+			if(vis[v]) 
 				query[idx].lca = fa(v);
 		} else if(query[idx].y == u) {
 			int v = query[idx].x;
-			if(vis[v])
+			if(vis[v]) 
 				query[idx].lca = fa(v);
 		}
 	}
-	for(int i=0; i<G[u].size(); i++) {
+	for(int i=0; i<(int)G[u].size(); i++) {
 		int chl = G[u][i];
 		if(vis[chl]) continue;
 		dfs(chl);

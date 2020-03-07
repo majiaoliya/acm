@@ -14,7 +14,7 @@ struct Q {
 void add(int idx) { res += arr[idx]; }
 void sub(int idx) { res -= arr[idx]; }
 
-int main(void) {
+int main(void) { //莫队算法板子
 	// n个数字, m个询问, [L, R]
 	int n, m, L, R;
 	cin >> n >> m;

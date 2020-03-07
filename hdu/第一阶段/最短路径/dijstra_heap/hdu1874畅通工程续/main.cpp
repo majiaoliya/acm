@@ -30,7 +30,7 @@ int main(void) {
 		scanf("%d %d", &s, &t);
 		priority_queue<pair<int, int> > Q;
 		Q.push(make_pair(-d[s],s)), d[s] = 0;
-		while(!Q.empty()) {
+		while(!Q.empty()) { //dijkstra+堆优化
 			int now = Q.top().second;
 			Q.pop();
 			for(int i=0; i<(int)E[now].size(); i++) {

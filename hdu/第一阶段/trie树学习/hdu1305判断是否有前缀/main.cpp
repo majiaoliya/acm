@@ -19,7 +19,7 @@ void init() {
 	flag = true;
 }
 
-bool insert(char* s) {
+bool insert(char* s) { //字典树板子
 	int root = 0, mark = false, len = strlen(s);
 	for(int i=0; i<len; i++) {
 		int pos = s[i] - '0';

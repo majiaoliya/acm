@@ -15,7 +15,7 @@ void init() {
 	memset(nxt, false, sizeof(nxt));
 }
 
-bool find(int x) {
+bool find(int x) { //红娘一般的匈牙利算法
 	for(int i=1; i<=nb; i++) {
 		if(mtx[x][i] && !vis[i]) {
 			vis[i] = true;

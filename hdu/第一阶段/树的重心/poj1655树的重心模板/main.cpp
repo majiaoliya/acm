@@ -29,7 +29,7 @@ void init() {
 
 void dfs(int now) {
 	vis[now] = true;
-	son[now] = 1;
+	son[now] = 1; //now子树大小
 	int tmax = 0;
 	for(int i=0; i<(int)G[now].size(); i++) {
 		int chl = G[now][i];
